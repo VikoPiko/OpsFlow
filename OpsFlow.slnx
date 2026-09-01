@@ -1,0 +1,7 @@
+<Solution>
+  <Project Path="OpsFlow.Application/OpsFlow.Application.csproj" />
+  <Project Path="OpsFlow.Domain/OpsFlow.Domain.csproj" />
+  <Project Path="OpsFlow.Infrastructure/OpsFlow.Infrastructure.csproj" />
+  <Project Path="OpsFlow.Persistence/OpsFlow.Persistence.csproj" />
+  <Project Path="OpsFlow/OpsFlow.csproj" />
+</Solution>

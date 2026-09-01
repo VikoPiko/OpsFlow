@@ -1,0 +1,117 @@
+# =========================
+# .NET / Visual Studio
+# =========================
+
+# Build output
+[Bb]in/
+[Oo]bj/
+[Dd]ebug/
+[Rr]elease/
+x64/
+x86/
+[Aa]rm/
+[Aa]rm64/
+
+# Visual Studio
+.vs/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Visual Studio Code
+.vscode/
+
+# Rider / JetBrains
+.idea/
+*.sln.iml
+
+# Test results
+TestResults/
+*.trx
+coverage/
+coverage-report/
+
+# NuGet
+*.nupkg
+*.snupkg
+.nuget/
+packages/
+
+# Generated files
+GeneratedFiles/
+GeneratedCode/
+
+# ASP.NET generated files
+wwwroot/lib/
+
+# Entity Framework
+# Don't ignore migrations — they should normally be committed!
+# Migrations/
+
+# =========================
+# Environment / Secrets
+# =========================
+
+.env
+.env.*
+!.env.example
+
+# User-specific ASP.NET settings
+appsettings.Local.json
+appsettings.Development.local.json
+
+# If these contain secrets in your project:
+# appsettings.Development.json
+
+# =========================
+# Logs
+# =========================
+
+*.log
+logs/
+Log/
+Logs/
+
+# =========================
+# OS files
+# =========================
+
+# Windows
+Thumbs.db
+Desktop.ini
+
+# macOS
+.DS_Store
+
+# Linux
+*~
+
+# =========================
+# Docker
+# =========================
+
+# Local Docker overrides
+docker-compose.override.yml
+docker-compose.local.yml
+
+# =========================
+# Temporary files
+# =========================
+
+*.tmp
+*.temp
+*.swp
+*.bak
+*.cache
+
+# =========================
+# Database files
+# =========================
+
+# Local databases
+*.db
+*.db-shm
+*.db-wal
+*.sqlite
+*.sqlite3
