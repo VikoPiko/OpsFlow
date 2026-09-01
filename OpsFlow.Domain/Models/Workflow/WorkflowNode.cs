@@ -6,6 +6,7 @@ namespace OpsFlow.Domain.Models.Workflow
     public sealed record WorkflowNode
     {
         public Guid Id { get; set; }
+        public string? Name { get; init; }
 
         [JsonPropertyName("type")]
         public NodeType Type { get; init; }
