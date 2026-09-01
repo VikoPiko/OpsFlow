@@ -12,10 +12,14 @@ namespace OpsFlow.Infrastructure
         {
             services.AddScoped<INodeExecutor, StartNodeExecutor>();
             services.AddScoped<INodeExecutor, DelayNodeExecutor>();
+            services.AddScoped<INodeExecutor, TaskNodeExecutor>();
+            services.AddScoped<INodeExecutor, HttpRequestNodeExecutor>();
+            services.AddScoped<INodeExecutor, CommandNodeExecutor>();
             services.AddScoped<INodeExecutor, LogNodeExecutor>();
             services.AddScoped<INodeExecutor, EndNodeExecutor>();
 
             services.AddScoped<WorkflowEngine>();
+            services.AddScoped<NodeEngine>();
             services.AddScoped<NodeExecutorRegistry>();
 
             return services;

@@ -5,6 +5,8 @@
         Start,
         Delay,
         Task,
+        HttpRequest,
+        Command,
         Log,
         End
     }
