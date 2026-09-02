@@ -29,6 +29,39 @@ namespace OpsFlow.Controllers
             return CreatedAtAction(nameof(GetWorkflowById), new { id = workflow.Id }, workflow);
         }
 
+        [HttpPost("build-workflow")]
+        public IActionResult BuildWorkflow()
+        {
+            //get nodes --> Base of operation, smallest unit of work (task)
+
+            //get edges -> Connection of Nodes giving execution order and contextual flow of data -> link nodes via ids
+            //ensure node direction is strict (always start with a start task, always end with an end task, no cycles, no missing nodes, etc.)
+
+            //validate nodes and edges -> make sure valid order and existing nodes/edges
+
+            //create and save workflow -> Save workflow for execution 
+
+            //return DTO of workflow -> return saved object
+
+            return Ok();
+        }
+
+        [HttpPut("{id:guid}")]
+        public IActionResult UpdateWorkflow(Guid id, [FromBody] WorkflowNode[] nodes, [FromBody] WorkflowEdge[] edges)
+        {
+            var workflows = cache.Get<List<Workflow>>("workflows");
+
+            var existingWorkflow = workflows?.SingleOrDefault(w => w.Id == id);
+
+            if (existingWorkflow is null)
+                return NotFound($"Workflow with ID {id} not found");
+
+            existingWorkflow.Nodes = nodes.ToList();
+            existingWorkflow.Edges = edges.ToList();
+
+            return Ok();
+        }
+
         [HttpPost("{id:guid}/execute")]
         public async Task<IActionResult> ExecuteWorkflow(Guid id, CancellationToken cancellationToken)
         {

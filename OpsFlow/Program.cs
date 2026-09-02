@@ -1,3 +1,4 @@
+using FluentValidation.AspNetCore;
 using OpsFlow.Infrastructure;
 using System.Text.Json.Serialization;
 
@@ -15,6 +16,8 @@ builder.Services.AddOpenApi();
 builder.Services.AddMemoryCache();
 
 builder.Services.AddInfrastructure();
+
+builder.Services.AddFluentValidationAutoValidation();
 
 builder.Services.AddCors(options => options.AddPolicy("AllowAll", policy =>
 {
