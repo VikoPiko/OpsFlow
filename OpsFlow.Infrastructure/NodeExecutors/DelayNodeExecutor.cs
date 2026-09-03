@@ -1,5 +1,6 @@
 ﻿using OpsFlow.Application.Interfaces;
 using OpsFlow.Domain.Models.Workflow;
+using OpsFlow.Domain.Models.Workflow.Configurations;
 
 namespace OpsFlow.Infrastructure.Executors
 {
@@ -9,16 +10,15 @@ namespace OpsFlow.Infrastructure.Executors
 
         public async Task ExecuteAsync(WorkflowNode node, CancellationToken cancellationToken)
         {
-            var delayValue = node.Configuration?.GetProperty("seconds").GetInt32() ?? 1;
-
-            Console.WriteLine($"Executing Delay Node: {node.Id} with delay of {delayValue} seconds");
+            if (node.Configuration is not DelayConfiguration configuration)
+                throw new InvalidOperationException("Invalid configuration for Delay node.");
 
             Console.WriteLine(
                 $"[{DateTimeOffset.UtcNow:HH:mm:ss.fff}] " +
-                $"Starting Delay Node {node.Id} for {delayValue} seconds");
+                $"Starting Delay Node {node.Id} for {configuration.Seconds} seconds");
 
             await Task.Delay(
-                TimeSpan.FromSeconds(delayValue),
+                TimeSpan.FromSeconds(configuration.Seconds),
                 cancellationToken);
 
             Console.WriteLine(

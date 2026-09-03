@@ -1,4 +1,5 @@
 using FluentValidation.AspNetCore;
+using OpsFlow.Application;
 using OpsFlow.Infrastructure;
 using System.Text.Json.Serialization;
 
@@ -16,6 +17,7 @@ builder.Services.AddOpenApi();
 builder.Services.AddMemoryCache();
 
 builder.Services.AddInfrastructure();
+builder.Services.AddApplication();
 
 builder.Services.AddFluentValidationAutoValidation();
 

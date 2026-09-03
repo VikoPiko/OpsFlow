@@ -46,21 +46,21 @@ namespace OpsFlow.Controllers
             return Ok();
         }
 
-        [HttpPut("{id:guid}")]
-        public IActionResult UpdateWorkflow(Guid id, [FromBody] WorkflowNode[] nodes, [FromBody] WorkflowEdge[] edges)
-        {
-            var workflows = cache.Get<List<Workflow>>("workflows");
+        //[HttpPut("{id:guid}")]
+        //public IActionResult UpdateWorkflow(Guid id, [FromBody] WorkflowNode[] nodes, [FromBody] WorkflowEdge[] edges)
+        //{
+        //    var workflows = cache.Get<List<Workflow>>("workflows");
 
-            var existingWorkflow = workflows?.SingleOrDefault(w => w.Id == id);
+        //    var existingWorkflow = workflows?.SingleOrDefault(w => w.Id == id);
 
-            if (existingWorkflow is null)
-                return NotFound($"Workflow with ID {id} not found");
+        //    if (existingWorkflow is null)
+        //        return NotFound($"Workflow with ID {id} not found");
 
-            existingWorkflow.Nodes = nodes.ToList();
-            existingWorkflow.Edges = edges.ToList();
+        //    existingWorkflow.Nodes = nodes.ToList();
+        //    existingWorkflow.Edges = edges.ToList();
 
-            return Ok();
-        }
+        //    return Ok();
+        //}
 
         [HttpPost("{id:guid}/execute")]
         public async Task<IActionResult> ExecuteWorkflow(Guid id, CancellationToken cancellationToken)

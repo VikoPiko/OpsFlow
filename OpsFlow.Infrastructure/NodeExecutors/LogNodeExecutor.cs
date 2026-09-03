@@ -1,5 +1,6 @@
 ﻿using OpsFlow.Application.Interfaces;
 using OpsFlow.Domain.Models.Workflow;
+using OpsFlow.Domain.Models.Workflow.Configurations;
 
 namespace OpsFlow.Infrastructure.NodeExecutors
 {
@@ -9,10 +10,11 @@ namespace OpsFlow.Infrastructure.NodeExecutors
 
         public Task ExecuteAsync(WorkflowNode node, CancellationToken cancellationToken)
         {
-            var config = node.Configuration?.GetProperty("message").GetString() ?? "NotSet";
+            if (node.Configuration is not LogConfiguration config)
+                throw new InvalidOperationException(" nvalid configuration for Log node.");
 
-            Console.WriteLine($"Executing Log Node: {node.Id} with message: {config}");
-            return Task.FromResult($"Log Node Executed with message: {config}");
+            Console.WriteLine($"Executing Log Node: {node.Id} with message: {config.Message}");
+            return Task.FromResult($"Log Node Executed with message: {config.Message}");
         }
     }
 }

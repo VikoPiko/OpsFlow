@@ -1,10 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Caching.Memory;
+using OpsFlow.Application.Services;
 using OpsFlow.Domain.Models.Requests;
 using OpsFlow.Domain.Models.Results;
 using OpsFlow.Domain.Models.Workflow;
 using OpsFlow.Infrastructure.Engine;
-using System.Text.Json;
 
 namespace OpsFlow.Controllers
 {
@@ -12,25 +12,23 @@ namespace OpsFlow.Controllers
     [Route("api/[controller]")]
     public class NodesController(
         NodeEngine nodeEngine,
+        WorkflowNodeService nodeService,
         IMemoryCache cache) : ControllerBase
     {
         [HttpPost("create-node")]
-        public IActionResult CreateNode(WorkflowNodeCreateRequest node)
+        public async Task<IActionResult> CreateNode(WorkflowNodeCreateRequest node, CancellationToken cancellationToken)
         {
             if (node is null)
                 return BadRequest("Node cannot be null");
 
-            var workflowNode = new WorkflowNode
-            {
-                Id = Guid.NewGuid(),
-                Type = node.Type,
-                Name = node?.Name ?? $"Node-{Guid.NewGuid()}",
-                Configuration = node?.Configuration ?? new JsonElement()
-            };
+            var workflowNode = await nodeService.CreateAsync(node, cancellationToken);
 
-            var nodes = cache.Get<List<WorkflowNode>>("nodes") ?? new List<WorkflowNode>();
-            nodes.Add(workflowNode);
-            cache.Set("nodes", nodes);
+            if (workflowNode is null)
+                return BadRequest("Failed to create node");
+
+            //var nodes = cache.Get<List<WorkflowNode>>("nodes") ?? new List<WorkflowNode>();
+            //nodes.Add(workflowNode);
+            //cache.Set("nodes", nodes);
 
             return Ok(workflowNode);
         }

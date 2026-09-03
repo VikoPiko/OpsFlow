@@ -3,5 +3,6 @@
   <Project Path="OpsFlow.Domain/OpsFlow.Domain.csproj" />
   <Project Path="OpsFlow.Infrastructure/OpsFlow.Infrastructure.csproj" />
   <Project Path="OpsFlow.Persistence/OpsFlow.Persistence.csproj" />
+  <Project Path="OpsFlow.Tests/OpsFlow.Tests.csproj" Id="865bfde1-9b05-4671-bd7e-d9bf0949cccf" />
   <Project Path="OpsFlow/OpsFlow.csproj" />
 </Solution>
